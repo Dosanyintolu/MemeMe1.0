@@ -60,6 +60,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="2M2-qP-BnK" id="YCI-uC-yf9"/>
+                        <outlet property="memedImage" destination="eif-ab-fWk" id="Irc-kP-GiZ"/>
                         <outlet property="pictureView" destination="eif-ab-fWk" id="Qlh-aR-UiN"/>
                         <outlet property="shareButton" destination="3Ip-q2-act" id="mVd-MU-U0M"/>
                         <outlet property="textField1" destination="Xw8-xd-9sa" id="97x-bf-UFj"/>

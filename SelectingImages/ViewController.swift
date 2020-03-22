@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var textField2: UITextField!
     @IBOutlet weak var theToolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var memedImage: UIImageView!
     
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
@@ -39,7 +40,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        // MARK: Subscribe to keyboard notification and validate if the camera exists.
         
         subscribeToKeyboardNotification()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -50,20 +50,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // MARK: Unsubscribe from keyboard notification
         unsubscribeToKeyboardNotification()
         
     }
     
-    // MARK: Struct for meme image
     
     struct Meme {
         var topText: String
         var bottomText: String
         var originalImage: UIImage
-        var memedImage: UIImage?
+        var memedImage: UIImage
     }
-
+    
+ 
+    
     @IBAction func selectImages(_ sender: Any) {
         let controller = UIImagePickerController()
         controller.delegate = self
@@ -71,6 +71,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         controller.allowsEditing = true
         present(controller, animated: true, completion: nil)
     }
+    
+   
     
     @IBAction func takingPicture(_ sender: Any) {
         let controller = UIImagePickerController()
@@ -82,14 +84,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             pictureView.image = image
-            dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    func save() {
-        let meme = Meme(topText: textField1.text!, bottomText: textField2.text!, originalImage: pictureView.image!, memedImage:)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
     }
-    
+   
+
+    func save() {
+        let meme = Meme(topText: textField1.text!, bottomText: textField2.text!, originalImage: pictureView.image!, memedImage:memedImage.image!)
+    }
     func generateMemeImage() -> UIImage {
         theToolBar.isHidden = true
         UIGraphicsBeginImageContext(self.view.frame.size)
