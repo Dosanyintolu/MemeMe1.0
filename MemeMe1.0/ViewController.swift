@@ -16,13 +16,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var textField2: UITextField!
     @IBOutlet weak var theToolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
-    @IBOutlet weak var memedImage: UIImageView!
+    
+    
+    var memeObject: Meme!
     
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor:  UIColor.white,
         NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 22)!,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
         NSAttributedString.Key.strokeWidth: 5
     ]
     
@@ -31,8 +33,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Do any additional setup after loading the view.
         textField1.delegate = self
         textField2.delegate = self
-        textField1.textColor = .white
-        textField2.textColor = .white
+        textField1.textColor = .red
+        textField2.textColor = .red
         textField1.defaultTextAttributes = memeTextAttributes
         textField2.defaultTextAttributes = memeTextAttributes
     }
@@ -93,7 +95,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    
 
     func save() {
-        let meme = Meme(topText: textField1.text!, bottomText: textField2.text!, originalImage: pictureView.image!, memedImage:memedImage.image!)
+        let meme = Meme(topText: textField1.text!, bottomText: textField2.text!, originalImage: pictureView.image!, memedImage:memeObject.memedImage)
     }
     func generateMemeImage() -> UIImage {
         theToolBar.isHidden = true
@@ -108,17 +110,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
        
-        if textField1.isTouchInside == true {
-            textField1.text = ""
-        } else {
-            textField1.text = "TOP"
-        }
-
-        if textField2.isTouchInside == true {
-            textField2.text = ""
-        } else {
-            textField2.text = "BOTTOM"
-        }
+        textField1.text = ""
+        textField2.text = ""
         
     }
     
@@ -129,7 +122,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         if textField2.text == "" {
             textField2.text = "BOTTOM"
-        } 
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
