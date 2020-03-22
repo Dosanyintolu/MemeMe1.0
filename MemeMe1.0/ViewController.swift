@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var textField2: UITextField!
     @IBOutlet weak var theToolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     
     var memeObject: Meme!
@@ -142,11 +143,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return keyboardSize.cgRectValue.height
     }
     
+    @IBAction func cancelEditing(_ sender: Any) {
+        pictureView.image = nil
+        textField1.text = nil
+        textField2.text = nil
+    }
     
     @IBAction func shareImage(_ sender: Any) {
         
         if pictureView.image == nil {
-            shareButton.isEnabled = true
+            shareButton.isEnabled = false
         } else {
             shareButton.isEnabled = true
         }

@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iYi-lw-NEI">
-                                <rect key="frame" x="0.0" y="76" width="414" height="737"/>
+                                <rect key="frame" x="0.0" y="76" width="414" height="742"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbQ-MD-b5m">
                                 <rect key="frame" x="0.0" y="32" width="414" height="44"/>
@@ -27,11 +27,15 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="QEn-CA-ym3"/>
-                                    <barButtonItem title="Cancel" style="plain" id="S5L-Iu-Zcs"/>
+                                    <barButtonItem title="Cancel" style="plain" id="S5L-Iu-Zcs">
+                                        <connections>
+                                            <action selector="cancelEditing:" destination="BYZ-38-t0r" id="GXQ-t7-d9t"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUT-tu-2qy">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Select Image" id="v8E-tz-tIW">
                                         <connections>
@@ -76,6 +80,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="vbm-NH-sbf" id="nlt-e8-1cp"/>
+                        <outlet property="cancelButton" destination="S5L-Iu-Zcs" id="G5Z-ly-OrU"/>
                         <outlet property="pictureView" destination="iYi-lw-NEI" id="zTP-HH-def"/>
                         <outlet property="shareButton" destination="VhZ-rk-hHj" id="SGG-oe-8ii"/>
                         <outlet property="textField1" destination="f3g-K6-nzq" id="0Zh-bg-ADU"/>
