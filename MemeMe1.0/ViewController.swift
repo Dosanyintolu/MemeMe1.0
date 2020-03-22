@@ -125,15 +125,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         if textField1.text == "" {
             textField1.text = "TOP"
-        } else {
-            textField1.text = ""
         }
 
         if textField2.text == "" {
             textField2.text = "BOTTOM"
-        } else {
-            textField2.text = ""
-        }
+        } 
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -157,7 +153,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func shareImage(_ sender: Any) {
         
         if pictureView.image == nil {
-            shareButton.isEnabled = false
+            shareButton.isEnabled = true
         } else {
             shareButton.isEnabled = true
         }
