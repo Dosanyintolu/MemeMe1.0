@@ -34,8 +34,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Do any additional setup after loading the view.
         textField1.delegate = self
         textField2.delegate = self
-        textField1.textColor = .red
-        textField2.textColor = .red
+        textField1.text = "TOP"
+        textField2.text = "BOTTOM"
+        textField1.textAlignment = .center
+        textField2.textAlignment = .center
         textField1.defaultTextAttributes = memeTextAttributes
         textField2.defaultTextAttributes = memeTextAttributes
     }
@@ -98,6 +100,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func save() {
         let meme = Meme(topText: textField1.text!, bottomText: textField2.text!, originalImage: pictureView.image!, memedImage:memeObject.memedImage)
     }
+    
     func generateMemeImage() -> UIImage {
         theToolBar.isHidden = true
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -110,20 +113,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-       
-        textField1.text = ""
-        textField2.text = ""
-        
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        if textField1.text == "" {
-            textField1.text = "TOP"
-        }
 
-        if textField2.text == "" {
-            textField2.text = "BOTTOM"
+        if textField1.text == "TOP" && textField1.isTouchInside == true {
+            textField1.text = ""
         }
+        
+        if textField2.text == "BOTTOM" && textField2.isTouchInside == true {
+                   textField2.text = ""
+               }
+    
+      
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
