@@ -116,12 +116,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         if textField1.text == "TOP" && textField1.isTouchInside == true {
             textField1.text = ""
-        }
-        
-        if textField2.text == "BOTTOM" && textField2.isTouchInside == true {
+        } else if textField2.text == "BOTTOM" && textField2.isTouchInside == true {
                    textField2.text = ""
                }
-    
       
     }
     
