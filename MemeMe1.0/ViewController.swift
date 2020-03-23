@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var theToolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var bottomToolBar: UIToolbar!
     
     
     var memeObject: Meme!
@@ -36,10 +37,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField2.delegate = self
         textField1.text = "TOP"
         textField2.text = "BOTTOM"
-        textField1.textAlignment = .center
-        textField2.textAlignment = .center
         textField1.defaultTextAttributes = memeTextAttributes
         textField2.defaultTextAttributes = memeTextAttributes
+        textField1.textColor = .white
+        textField2.textColor = .white
+        textField1.textAlignment = .center
+        textField2.textAlignment = .center
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,16 +61,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeToKeyboardNotification()
         
     }
-    
-    
-    struct Meme {
-        var topText: String
-        var bottomText: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
-    
- 
     
     @IBAction func selectImages(_ sender: Any) {
         let controller = UIImagePickerController()
@@ -96,20 +89,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.dismiss(animated: true, completion: nil)
     }
    
-
-    func save() {
-        let meme = Meme(topText: textField1.text!, bottomText: textField2.text!, originalImage: pictureView.image!, memedImage:memeObject.memedImage)
-    }
-    
     func generateMemeImage() -> UIImage {
         theToolBar.isHidden = true
+        bottomToolBar.isHidden = true
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         theToolBar.isHidden = false
+        bottomToolBar.isHidden = false
         
         return memedImage
+    }
+    
+    func save() {
+        _ = Meme(topText: textField1.text!, bottomText: textField2.text!, originalImage: pictureView.image!, memedImage: generateMemeImage())
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -122,9 +116,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
       
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if textField1.text == "" {
+            textField1.text = "TOP"
+        } else if textField2.text == "" {
+            textField2.text = "BOTTOM"
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField1.resignFirstResponder()
-        textField2.resignFirstResponder()
+        if textField1.isEditing == true {
+            return textField1.resignFirstResponder()
+        } else if textField2.isEditing == true {
+             return textField2.resignFirstResponder()
+        }
+        
         return true
     }
     
