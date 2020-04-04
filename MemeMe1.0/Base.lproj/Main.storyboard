@@ -219,13 +219,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" rowHeight="83" id="T8P-dE-3bV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" rowHeight="83" id="T8P-dE-3bV" customClass="SentMemesTableViewCell" customModule="MemeMe1_0" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="83"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T8P-dE-3bV" id="khI-fh-y2m">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="83"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LZJ-9G-QVo">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="83"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="83" id="aSm-5Y-epc"/>
+                                                <constraint firstAttribute="width" constant="128" id="blg-9C-Nsv"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2GJ-eX-Yv5">
+                                            <rect key="frame" x="128" y="0.0" width="286" height="86"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bje-rc-NOa">
+                                                    <rect key="frame" x="0.0" y="0.0" width="286" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="286" id="0gi-XB-ACQ"/>
+                                                        <constraint firstAttribute="height" constant="43" id="iSw-IZ-hmn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hmj-aQ-8xw">
+                                                    <rect key="frame" x="0.0" y="43" width="286" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43" id="huf-Yz-rLP"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="286" id="xM7-GC-XRe"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="LZJ-9G-QVo" secondAttribute="bottom" id="4xa-iO-UG0"/>
+                                        <constraint firstItem="LZJ-9G-QVo" firstAttribute="leading" secondItem="khI-fh-y2m" secondAttribute="leading" id="EB8-k3-yU1"/>
+                                        <constraint firstItem="LZJ-9G-QVo" firstAttribute="top" secondItem="khI-fh-y2m" secondAttribute="top" id="bIq-7q-xbY"/>
+                                        <constraint firstItem="2GJ-eX-Yv5" firstAttribute="top" secondItem="LZJ-9G-QVo" secondAttribute="top" id="eIt-6a-yqs"/>
+                                        <constraint firstItem="2GJ-eX-Yv5" firstAttribute="leading" secondItem="LZJ-9G-QVo" secondAttribute="trailing" id="inF-MO-zyi"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bottomLabel" destination="Hmj-aQ-8xw" id="G90-fw-ZEK"/>
+                                    <outlet property="myImage" destination="LZJ-9G-QVo" id="V6D-gZ-QJf"/>
+                                    <outlet property="topLabel" destination="Bje-rc-NOa" id="Nee-rp-ZLf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
