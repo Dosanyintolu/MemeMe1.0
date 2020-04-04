@@ -9,10 +9,16 @@
 import Foundation
 import UIKit
 
-class SentMemesCollectionController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class SentMemesCollectionController: UICollectionViewController {
     
     
     var memes = [Meme]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +27,12 @@ class SentMemesCollectionController: UIViewController, UICollectionViewDelegate,
         memes = appDelegate.memes
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 1
+        return memes.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! SentMemesCollectionViewCell
         let memes = self.memes[(indexPath as NSIndexPath).row]
@@ -36,6 +42,12 @@ class SentMemesCollectionController: UIViewController, UICollectionViewDelegate,
         
         return cell
     }
+    
+    @IBAction func memeSegue(_ sender: Any) {
+           
+           let controller = storyboard?.instantiateViewController(identifier: "MemeController") as! MemeController
+           present(controller, animated: true, completion: nil)
+       }
     
     
 }

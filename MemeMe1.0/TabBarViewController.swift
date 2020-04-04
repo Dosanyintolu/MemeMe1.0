@@ -14,12 +14,13 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MemeMe", style: .plain, target: self, action: #selector(moveController))
-    }
-    
-    
-    @objc func moveController() {
-        let controller = (storyboard?.instantiateViewController(identifier: "MemeController"))!
-        present(controller, animated: true, completion: nil)
-    }
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MemeMe", style: .plain, target: self, action: #selector(moveController))
+//    }
+//
+//
+//    @objc func moveController() {
+//        let controller = (storyboard?.instantiateViewController(identifier: "MemeController"))!
+//        present(controller, animated: true, completion: nil)
+//    }
+}
 }
