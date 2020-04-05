@@ -26,21 +26,27 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor:  UIColor.white,
         NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 25)!,
         NSAttributedString.Key.strokeWidth: 5
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        if pictureView.image == nil {
+            shareButton.isEnabled = false
+        } else {
+            shareButton.isEnabled = true
+        }
         textField1.delegate = self
         textField2.delegate = self
         textField1.text = "TOP"
         textField2.text = "BOTTOM"
-        textField1.defaultTextAttributes = memeTextAttributes
-        textField2.defaultTextAttributes = memeTextAttributes
         textField1.textColor = .white
         textField2.textColor = .white
+        textField1.defaultTextAttributes = memeTextAttributes
+        textField2.defaultTextAttributes = memeTextAttributes
         textField1.textAlignment = .center
         textField2.textAlignment = .center
     }
@@ -146,13 +152,6 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func shareImage(_ sender: Any) {
-        
-        if pictureView.image == nil {
-            shareButton.isEnabled = false
-        } else {
-            shareButton.isEnabled = true
-        }
-        
         
         let image = generateMemeImage()
         let activityVC = UIActivityViewController(activityItems:[image], applicationActivities: nil)
