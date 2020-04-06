@@ -39,7 +39,6 @@ class SentMemesTableController: UITableViewController {
         return cell
     }
     
-    
     @IBAction func memeSegue(_ sender: Any) {
         
         let controller = storyboard?.instantiateViewController(identifier: "MemeController") as! MemeController

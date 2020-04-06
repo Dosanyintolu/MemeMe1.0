@@ -131,7 +131,6 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="188" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20.5" id="oEO-iY-OYc"/>
-                                                        <constraint firstAttribute="width" constant="188" id="vdY-mm-INn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -140,7 +139,6 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shU-ej-8NA">
                                                     <rect key="frame" x="0.0" y="28.5" width="188" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="188" id="6gE-Xx-uJD"/>
                                                         <constraint firstAttribute="height" constant="20.5" id="hUf-8g-sFw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
