@@ -14,4 +14,10 @@ class SentMemesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var bottomText: UILabel!
 
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        memeImage.layer.cornerRadius = 8
+    }
 }

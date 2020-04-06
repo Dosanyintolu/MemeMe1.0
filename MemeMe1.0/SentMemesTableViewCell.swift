@@ -19,6 +19,7 @@ class SentMemesTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        myImage.layer.cornerRadius = 8
     }
 
 }

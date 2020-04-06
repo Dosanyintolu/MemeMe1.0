@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIAdaptivePresentationControllerDelegate {
 
     @IBOutlet weak var pictureView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -21,24 +21,19 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     var memeObject: Meme!
-    
-    
+    let table = SentMemesTableController()
+    let collection = SentMemesCollectionController()
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor:  UIColor.white,
         NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 25)!,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 26)!,
         NSAttributedString.Key.strokeWidth: 5
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        if pictureView.image == nil {
-            shareButton.isEnabled = false
-        } else {
-            shareButton.isEnabled = true
-        }
+        shareButton.isEnabled = false
         textField1.delegate = self
         textField2.delegate = self
         textField1.text = "TOP"
@@ -49,6 +44,8 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField2.defaultTextAttributes = memeTextAttributes
         textField1.textAlignment = .center
         textField2.textAlignment = .center
+        navigationController?.presentationController?.delegate = self
+        isModalInPresentation = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +71,7 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         controller.sourceType = .photoLibrary
         controller.allowsEditing = true
         present(controller, animated: true, completion: nil)
+        shareButton.isEnabled = true
     }
     
    
@@ -83,6 +81,7 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         controller.delegate = self
         controller.sourceType = .camera
         present(controller, animated: true, completion: nil)
+        shareButton.isEnabled = true
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -164,7 +163,12 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
         present(activityVC, animated: true, completion: nil)
+    }
     
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        
+        table.tableView.reloadData()
+        collection.collectionView.reloadData()
     }
 
 }

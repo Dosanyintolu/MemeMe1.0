@@ -16,8 +16,8 @@ class SentMemesTableController: UITableViewController {
                   return appDelegate.memes
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         tableView.reloadData()
        
@@ -32,8 +32,8 @@ class SentMemesTableController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") as! SentMemesTableViewCell
         let memes = self.memes[(indexPath as NSIndexPath).row]
         
-        cell.topLabel.text = "Top: \(memes.topText)"
-        cell.bottomLabel.text = "Bottom: \(memes.bottomText)"
+        cell.topLabel.text = memes.topText
+        cell.bottomLabel.text = memes.bottomText
         cell.myImage.image = memes.memedImage
 
         return cell
@@ -43,7 +43,9 @@ class SentMemesTableController: UITableViewController {
     @IBAction func memeSegue(_ sender: Any) {
         
         let controller = storyboard?.instantiateViewController(identifier: "MemeController") as! MemeController
+        controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true, completion: nil)
     }
     
 }
+

@@ -18,8 +18,8 @@ class SentMemesCollectionController: UICollectionViewController {
     }
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         collectionView.reloadData()
     }
@@ -27,8 +27,8 @@ class SentMemesCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let space: CGFloat = 2.0
-        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        let space: CGFloat = 0.0
+        let dimension = (view.frame.size.width - (2 * space)) / 1.0
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
@@ -45,8 +45,8 @@ class SentMemesCollectionController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! SentMemesCollectionViewCell
         let memes = self.memes[(indexPath as NSIndexPath).row]
         cell.memeImage.image = memes.memedImage
-        cell.bottomText.text = "Bottom:\(memes.bottomText)"
-        cell.topText.text = "Top:\(memes.topText)"
+        cell.bottomText.text = memes.bottomText
+        cell.topText.text = memes.topText
         
         return cell
     }
@@ -54,6 +54,7 @@ class SentMemesCollectionController: UICollectionViewController {
     @IBAction func memeSegue(_ sender: Any) {
            
            let controller = storyboard?.instantiateViewController(identifier: "MemeController") as! MemeController
+           controller.modalPresentationStyle = .fullScreen
            present(controller, animated: true, completion: nil)
        }
     
