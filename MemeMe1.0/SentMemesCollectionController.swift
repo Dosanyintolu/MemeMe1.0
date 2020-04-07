@@ -27,8 +27,8 @@ class SentMemesCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let space: CGFloat = 3.0
-        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        let space: CGFloat = 1.0
+        let dimension = (view.frame.size.width - (2 * space)) / 1.5
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
@@ -49,6 +49,12 @@ class SentMemesCollectionController: UICollectionViewController {
         cell.topText.text = memes.topText
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailMemeController = storyboard?.instantiateViewController(withIdentifier: "MemesDetailController") as! MemesDetailController
+        detailMemeController.memes = self.memes[(indexPath as NSIndexPath).row]
+        self.navigationController?.pushViewController(detailMemeController, animated: true)
     }
     
     @IBAction func memeSegue(_ sender: Any) {

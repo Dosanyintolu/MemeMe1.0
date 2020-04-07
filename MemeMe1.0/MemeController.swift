@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  SelectingImages
+//  MemeMe1.0
 //
 //  Created by Doyinsola Osanyintolu on 3/19/20.
 //  Copyright © 2020 DoyinOsanyintolu. All rights reserved.
@@ -24,7 +24,7 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let table = SentMemesTableController()
     let collection = SentMemesCollectionController()
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor:  UIColor.white,
+        NSAttributedString.Key.strokeColor:  UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 26)!,
         NSAttributedString.Key.strokeWidth: 5
@@ -34,16 +34,7 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         shareButton.isEnabled = false
-        textField1.delegate = self
-        textField2.delegate = self
-        textField1.text = "TOP"
-        textField2.text = "BOTTOM"
-        textField1.textColor = .white
-        textField2.textColor = .white
-        textField1.defaultTextAttributes = memeTextAttributes
-        textField2.defaultTextAttributes = memeTextAttributes
-        textField1.textAlignment = .center
-        textField2.textAlignment = .center
+        configureText()
         navigationController?.presentationController?.delegate = self
         isModalInPresentation = false
     }
@@ -56,7 +47,6 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
     }
-
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -65,21 +55,23 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    @IBAction func selectImages(_ sender: Any) {
+    func configureText() {
+           textField1.text = "TOP"
+           textField2.text = "BOTTOM"
+           textField1.textAlignment = .center
+           textField2.textAlignment = .center
+           textField1.defaultTextAttributes = memeTextAttributes
+           textField2.defaultTextAttributes = memeTextAttributes
+       }
+     
+    @IBAction func selectImage(_ sender: Any) {
         let controller = UIImagePickerController()
         controller.delegate = self
-        controller.sourceType = .photoLibrary
-        controller.allowsEditing = true
-        present(controller, animated: true, completion: nil)
-        shareButton.isEnabled = true
-    }
-    
-   
-    
-    @IBAction func takingPicture(_ sender: Any) {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.sourceType = .camera
+        if (sender as AnyObject).tag == 1 {
+            controller.sourceType = .photoLibrary
+        } else {
+            controller.sourceType = .camera
+        }
         present(controller, animated: true, completion: nil)
         shareButton.isEnabled = true
     }
@@ -119,7 +111,8 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         if textField1.text == "TOP" && textField1.isTouchInside == true {
             textField1.text = ""
-        } else if textField2.text == "BOTTOM" && textField2.isTouchInside == true {
+        }
+        if textField2.text == "BOTTOM" && textField2.isTouchInside == true {
                    textField2.text = ""
                }
       
@@ -128,20 +121,23 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         if textField1.text == "" {
             textField1.text = "TOP"
-        } else if textField2.text == "" {
+        }
+        if textField2.text == "" {
             textField2.text = "BOTTOM"
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField1.isEditing == true {
-            return textField1.resignFirstResponder()
+            textField1.resignFirstResponder()
         } else if textField2.isEditing == true {
-             return textField2.resignFirstResponder()
+            textField2.resignFirstResponder()
         }
         
         return true
     }
+    
+    
     
     @IBAction func cancelEditing(_ sender: Any) {
         pictureView.image = nil
@@ -194,8 +190,10 @@ extension MemeController {
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
+        if textField2.isFirstResponder == true {
           view.frame.origin.y -= getKeyboardHeight(notification)
-      }
+        }
+    }
     
     @objc func keyboardWillHide(_ notification: Notification) {
           view.frame.origin.y = 0
