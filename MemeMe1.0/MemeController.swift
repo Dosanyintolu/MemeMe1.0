@@ -58,10 +58,10 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func configureText() {
            textField1.text = "TOP"
            textField2.text = "BOTTOM"
-           textField1.textAlignment = .center
-           textField2.textAlignment = .center
            textField1.defaultTextAttributes = memeTextAttributes
            textField2.defaultTextAttributes = memeTextAttributes
+           textField1.textAlignment = .center
+           textField2.textAlignment = .center
        }
      
     @IBAction func selectImage(_ sender: Any) {
