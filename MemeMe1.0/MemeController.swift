@@ -27,14 +27,15 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSAttributedString.Key.strokeColor:  UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 26)!,
-        NSAttributedString.Key.strokeWidth: 5
+        NSAttributedString.Key.strokeWidth: -5
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        configureText(textField: textField1, text: "TOP")
+        configureText(textField: textField2, text: "BOTTOM")
         shareButton.isEnabled = false
-        configureText()
         navigationController?.presentationController?.delegate = self
         isModalInPresentation = false
     }
@@ -55,13 +56,10 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    func configureText() {
-           textField1.text = "TOP"
-           textField2.text = "BOTTOM"
-           textField1.defaultTextAttributes = memeTextAttributes
-           textField2.defaultTextAttributes = memeTextAttributes
-           textField1.textAlignment = .center
-           textField2.textAlignment = .center
+    func configureText(textField: UITextField, text: String) {
+        textField.text = text
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
        }
      
     @IBAction func selectImage(_ sender: Any) {
@@ -77,13 +75,13 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             pictureView.image = image
         }
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
    
     func generateMemeImage() -> UIImage {
@@ -143,7 +141,7 @@ class MemeController: UIViewController, UIImagePickerControllerDelegate, UINavig
         pictureView.image = nil
         textField1.text = nil
         textField2.text = nil
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func shareImage(_ sender: Any) {
@@ -190,7 +188,7 @@ extension MemeController {
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        if textField2.isFirstResponder == true {
+        if textField2.isFirstResponder {
           view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
