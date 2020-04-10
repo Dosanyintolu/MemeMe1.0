@@ -105,7 +105,7 @@
             </objects>
             <point key="canvasLocation" x="3671.0144927536235" y="136.60714285714286"/>
         </scene>
-        <!--Sent Memes Collection Controller-->
+        <!--MemeMe-->
         <scene sceneID="hvh-ij-h2Y">
             <objects>
                 <collectionViewController id="EIc-ra-XRc" customClass="SentMemesCollectionController" customModule="MemeMe1_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -181,7 +181,7 @@
                             <outlet property="delegate" destination="EIc-ra-XRc" id="6KO-Bd-jLt"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="q3G-ut-hvd">
+                    <navigationItem key="navigationItem" title="MemeMe" largeTitleDisplayMode="always" id="q3G-ut-hvd">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oxZ-BQ-K72">
                             <connections>
                                 <action selector="memeSegue:" destination="EIc-ra-XRc" id="9bL-qv-75f"/>
@@ -294,7 +294,7 @@
             </objects>
             <point key="canvasLocation" x="1951" y="-579"/>
         </scene>
-        <!--Sent Memes Table Controller-->
+        <!--MemeMe-->
         <scene sceneID="Bku-UM-TrP">
             <objects>
                 <tableViewController id="ki9-FE-ucv" customClass="SentMemesTableController" customModule="MemeMe1_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -367,7 +367,7 @@
                             <outlet property="delegate" destination="ki9-FE-ucv" id="VFs-z6-UIx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="nS3-zW-mZA">
+                    <navigationItem key="navigationItem" title="MemeMe" largeTitleDisplayMode="always" id="nS3-zW-mZA">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="g7u-aY-dzA">
                             <connections>
                                 <action selector="memeSegue:" destination="ki9-FE-ucv" id="fUy-on-7b0"/>
